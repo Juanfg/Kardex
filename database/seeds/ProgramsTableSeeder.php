@@ -12,7 +12,7 @@ class ProgramsTableSeeder extends Seeder
     public function run()
     {
         DB::table('programs')->insert([
-            'name' => 'ITC'
+            'name' => 'ITC11'
         ]);
         
         DB::table('programs')->insert([

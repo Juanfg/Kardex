@@ -12,9 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/pdf', 'PDFController@create')->name('pdf.create');
+Route::post('/pdf/store', 'PDFController@store')->name('pdf.store');

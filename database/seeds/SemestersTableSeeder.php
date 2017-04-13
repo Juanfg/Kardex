@@ -12,39 +12,43 @@ class SemestersTableSeeder extends Seeder
     public function run()
     {
         DB::table('semesters')->insert([
-            'name' => '1ro'
+            'name' => 'Remedial'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '2do'
+            'name' => '01'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '3ro'
+            'name' => '02'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '4to'
+            'name' => '03'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '5to'
+            'name' => '04'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '6to'
+            'name' => '05'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '7mo'
+            'name' => '06'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '8vo'
+            'name' => '07'
         ]);
 
         DB::table('semesters')->insert([
-            'name' => '9no'
+            'name' => '08'
+        ]);
+
+        DB::table('semesters')->insert([
+            'name' => '09'
         ]);
     }
 }

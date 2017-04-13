@@ -12,24 +12,31 @@ class CoursesTableSeeder extends Seeder
     public function run()
     {
         DB::table('courses')->insert([
-            'code' => 'TH1',
-            'name' => 'Matematicas I',
+            'code' => 'F1001',
+            'name' => 'Introduccion a la fisica',
             'units' => 8,
             'semester_id' => 1
         ]);
 
         DB::table('courses')->insert([
-            'code' => 'TH2',
-            'name' => 'Matematicas II',
+            'code' => 'H1001',
+            'name' => 'Ingles remedial I',
             'units' => 8,
-            'semester_id' => 2
+            'semester_id' => 1
         ]);
 
         DB::table('courses')->insert([
-            'code' => 'TH3',
-            'name' => 'Matematicas III',
+            'code' => 'MA1001',
+            'name' => 'Introduccion a las matematicas',
+            'units' => 16,
+            'semester_id' => 1
+        ]);
+
+        DB::table('courses')->insert([
+            'code' => 'DS1003',
+            'name' => 'Ciencias naturales y des suste',
             'units' => 8,
-            'semester_id' => 3
+            'semester_id' => 2
         ]);
     }
 }
