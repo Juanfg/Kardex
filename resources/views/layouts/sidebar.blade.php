@@ -22,13 +22,21 @@
 		<aside class="app-sidebar" id="sidebar">
 			<div class="sidebar-menu">
 				<ul class="sidebar-nav">
-					<li>
-						<a href="{{ route('home') }}">
+					<li class="dropdown">
+						<a class="dropdown-toggle" data-toggle="dropdown">
 							<div class="icon">
 								<i class="fa fa-tasks" aria-hidden="true"></i>
 							</div>
 							<div class="title">Estudiantes</div>
 						</a>
+						<div class="dropdown-menu">
+							<ul>
+								<li class="section"><i class="fa fa-graduation-cap" aria-hidden="true"></i>Programas Acad&eacute;micos</li>
+								@foreach ($programs as $program)
+									<li><a href="{{ route('program.show', [ $program->id ]) }}">{{ $program->name }}</a></li>
+								@endforeach
+							</ul>
+						</div>
 					</li>
 					<li>
 						<a href="{{ route('pdf.create') }}">

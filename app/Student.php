@@ -13,6 +13,6 @@ class Student extends Model
 
     public function courses()
     {
-        return $this->belongsToMany('App\Course', 'courses_students');
+        return $this->belongsToMany('App\Course', 'courses_students')->withPivot('grade', 'currently_studying', 'approved');
     }
 }

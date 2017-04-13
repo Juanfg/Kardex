@@ -30,14 +30,12 @@ class PDFController extends Controller
         $this->storeDataFromPDF($request->pdf);
 
         $request->session()->flash("message", "Agregado con &eacute;xito");
-        return redirect()->route('pdf.create');
+        // return redirect()->route('pdf.create');
     }
 
     public function storeDataFromPDF($file)
     {
         $parser = new Parser();
-        $courses = Program::find(1)->courses()->get();
-
         $pdf = $parser->parseFile($file);
         $full_text = $pdf->getText();
 
@@ -96,7 +94,7 @@ class PDFController extends Controller
         $semester = $semester[0] == '0' ? $semester[1] : $semester;
 
         // Checar si el nombre ya existe
-        $already_exist = Student::first()->where('code', $code)->get();
+        $already_exist = Student::where('code', $code)->get();
         if ($already_exist)
         {
             foreach ($already_exist as $student)
@@ -104,16 +102,17 @@ class PDFController extends Controller
         }
 
         // Crear estudiante
-        $programs = Program::first()->where('name', $program)->get();
+        $program = Program::first()->where('name', $program)->get();
         $student = new Student();
         $student->code = $code;
         $student->name = $name;
-        foreach ($programs as $program)
-            $student->program_id = $program->id;
+        $student->program_id = $program[0]->id;
         $student->semester_id = $semester + 1;
         $student->save();
 
         // Guardar calificaciones
+        $courses = Program::find($program[0]->id)->courses()->get();
+        echo $courses;
         foreach ($courses as $course)
         {
             $course_name = str_replace(" ", "", $course->name);
@@ -124,33 +123,30 @@ class PDFController extends Controller
                 if ($course->semester_id == 1)
                 {
                     // Remediales
-                    if ($occurrence[$i] == 'A')
-                    {
-                        DB::table('courses_students')->insert([
-                            'course_id' => $course->id,
-                            'student_id' => $student->id, //change it
-                            'grade' => NULL,
-                            'approved' => true
-                        ]);
-                    }
-                    else
-                    {
-                        DB::table('courses_students')->insert([
-                            'course_id' => $course->id,
-                            'student_id' => $student->id,
-                            'grade' => NULL,
-                            'approved' => false
-                        ]);
-                    }
+                    $approved = $occurrence[$i] == 'A' ? true : false;
+                    $currently_studying = $occurrence[$i] == 'C' ? true : false;
+
+                    DB::table('courses_students')->insert([
+                        'course_id' => $course->id,
+                        'student_id' => $student->id,
+                        'grade' => NULL,
+                        'currently_studying' => $currently_studying,
+                        'approved' => $approved
+                    ]);
                 }
                 else
                 {
                     // Semestre normal
+                    $currently_studying = $occurrence[$i] == 'C' ? true : false;
                     $grade = "";
-                    while (is_numeric($occurrence[$i]))
+
+                    if ($currently_studying == false)
                     {
-                        $grade .= $occurrence[$i];
-                        $i++;
+                        while (is_numeric($occurrence[$i]))
+                        {
+                            $grade .= $occurrence[$i];
+                            $i++;
+                        }
                     }
 
                     $grade = $grade == "" ? NULL : $grade;
@@ -160,6 +156,7 @@ class PDFController extends Controller
                         'course_id' => $course->id,
                         'student_id' => $student->id,
                         'grade' => $grade,
+                        'currently_studying' => $currently_studying,
                         'approved' => $approved
                     ]);
                 }

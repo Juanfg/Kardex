@@ -38,5 +38,26 @@ class CoursesTableSeeder extends Seeder
             'units' => 8,
             'semester_id' => 2
         ]);
+
+        DB::table('courses')->insert([
+            'code' => 'H1002',
+            'name' => 'Ingles remedial II',
+            'units' => 8,
+            'semester_id' => 1
+        ]);
+
+        DB::table('courses')->insert([
+            'code' => 'TC1001',
+            'name' => 'Introduccion a la computacion',
+            'units' => 8,
+            'semester_id' => 1
+        ]);
+
+        DB::table('courses')->insert([
+            'code' => 'F1002',
+            'name' => 'Fisica I',
+            'units' => 8,
+            'semester_id' => 2
+        ]);
     }
 }

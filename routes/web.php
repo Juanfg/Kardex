@@ -21,3 +21,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/pdf', 'PDFController@create')->name('pdf.create');
 Route::post('/pdf/store', 'PDFController@store')->name('pdf.store');
+
+Route::get('/program/{id}', 'ProgramController@show')->name('program.show');
