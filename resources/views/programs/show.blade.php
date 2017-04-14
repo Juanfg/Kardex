@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            {{ $program_name }}
+            {{ $program->name }}
         </div>
         <div class="scroll card-body no-padding">
             <table class="table table-striped primary" cellspacing="0" width="100%">
@@ -36,6 +36,12 @@
                     @endforeach
                 </tbody>
             </table>
+        </div>
+
+        <div class="card-body">
+            {!! Form::open( [ 'method' => 'GET', 'route' => ['program.excel', $program->id]]) !!}
+                <button class="btn btn-success"><i class="fa fa-file-excel-o"></i> Exportar a Excel</button>
+            {!! Form::close() !!}
         </div>
     </div>
 @endsection

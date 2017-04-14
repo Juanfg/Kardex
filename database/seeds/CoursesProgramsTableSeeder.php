@@ -47,6 +47,16 @@ class CoursesProgramsTableSeeder extends Seeder
         ]);
 
         DB::table('courses_programs')->insert([
+            'course_id' => 8,
+            'program_id' => 1
+        ]);
+
+        DB::table('courses_programs')->insert([
+            'course_id' => 9,
+            'program_id' => 1
+        ]);
+
+        DB::table('courses_programs')->insert([
             'course_id' => 1,
             'program_id' => 2
         ]);

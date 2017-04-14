@@ -59,5 +59,19 @@ class CoursesTableSeeder extends Seeder
             'units' => 8,
             'semester_id' => 2
         ]);
+
+        DB::table('courses')->insert([
+            'code' => 'H1015',
+            'name' => 'Fundamentos de la escritura',
+            'units' => 8,
+            'semester_id' => 1
+        ]);
+
+        DB::table('courses')->insert([
+            'code' => 'TC1021',
+            'name' => 'Proyecto desarrollo de videoj',
+            'units' => 8,
+            'semester_id' => 5
+        ]);
     }
 }

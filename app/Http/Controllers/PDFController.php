@@ -30,7 +30,7 @@ class PDFController extends Controller
         $this->storeDataFromPDF($request->pdf);
 
         $request->session()->flash("message", "Agregado con &eacute;xito");
-        // return redirect()->route('pdf.create');
+        return redirect()->route('pdf.create');
     }
 
     public function storeDataFromPDF($file)
@@ -112,7 +112,6 @@ class PDFController extends Controller
 
         // Guardar calificaciones
         $courses = Program::find($program[0]->id)->courses()->get();
-        echo $courses;
         foreach ($courses as $course)
         {
             $course_name = str_replace(" ", "", $course->name);
