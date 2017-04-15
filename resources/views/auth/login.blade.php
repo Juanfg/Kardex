@@ -13,7 +13,7 @@
                 <span class="input-group-addon" id="basic-addon1">
                     <i class="fa fa-user" aria-hidden="true"></i>
                 </span>
-                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" aria-describedby="basic-addon1" required autofocus>
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="E-mail" aria-describedby="basic-addon1" required autofocus>
                 @if ($errors->has('email'))
                     <span class="help-block">
                         <strong>{{ $errors->first('email') }}</strong>
@@ -27,7 +27,7 @@
                 <span class="input-group-addon" id="basic-addon2">
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </span>
-                <input id="password" type="password" class="form-control" name="password" placeholder="Password" aria-describedby="basic-addon2" required>
+                <input id="password" type="password" class="form-control" name="password" placeholder="Contrase&ntilde;a" aria-describedby="basic-addon2" required>
                 @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -47,6 +47,6 @@
         <div class="title">OR</div>
     </div>
     <div class="form-footer">
-        <a class="btn btn-info" href="{{ route('register') }}">Registrate</a>
+        <a class="btn btn-info" href="{{ route('register') }}">Reg&iacute;strate</a>
     </div>
 @endsection

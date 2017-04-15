@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Smalot\PdfParser\Parser;
 use Smalot\PdfParser\Element\ElementArray;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use App\Program;
@@ -94,7 +95,8 @@ class PDFController extends Controller
         $semester = $semester[0] == '0' ? $semester[1] : $semester;
 
         // Checar si el nombre ya existe
-        $already_exist = Student::where('code', $code)->get();
+        $current_user = Auth::user();
+        $already_exist = Student::where('code', $code)->where('user_id', $current_user->id)->get();
         if ($already_exist)
         {
             foreach ($already_exist as $student)
@@ -108,6 +110,7 @@ class PDFController extends Controller
         $student->name = $name;
         $student->program_id = $program[0]->id;
         $student->semester_id = $semester + 1;
+        $student->user_id = $current_user->id;
         $student->save();
 
         // Guardar calificaciones

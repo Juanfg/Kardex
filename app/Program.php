@@ -15,4 +15,9 @@ class Program extends Model
     {
         return $this->belongsToMany('App\Course', 'courses_programs');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'programs_users');
+    }
 }
