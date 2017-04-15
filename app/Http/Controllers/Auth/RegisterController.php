@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use \Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -68,4 +69,19 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    /**
+      * Handle a registration request for the application.
+      *
+      * @param  \Illuminate\Http\Request  $request
+      * @return \Illuminate\Http\Response
+      */
+    //  public function register(Request $request)
+    //  {
+    //      $this->validator($request->all())->validate();
+    //      $user = $this->create($request->all());
+    //      //$this->guard()->login($user);
+    //     return redirect($this->redirectPath());
+            // Change the $redirectTo variable to redirect to 'register'
+    //   }
 }
