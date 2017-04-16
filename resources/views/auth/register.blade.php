@@ -42,7 +42,7 @@
                 <span class="input-group-addon" id="basic-addon2">
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </span>
-                <input id="password" type="password" class="form-control" name="password" placeholder="Password" aria-describedby="basic-addon2" required>
+                <input id="password" type="password" class="form-control" name="password" placeholder="Contrase&ntilde;a" aria-describedby="basic-addon2" required>
                 @if ($errors->has('password'))
                     <span class="help-block">
                         <strong>{{ $errors->first('password') }}</strong>
@@ -56,7 +56,7 @@
                 <span class="input-group-addon" id="basic-addon2">
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </span>
-                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmar Password" aria-describedby="basic-addon2" required>
+                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirmar Contrase&ntilde;a" aria-describedby="basic-addon2" required>
             </div>
         </div>
 
@@ -67,4 +67,10 @@
         </div>
     </form>
 
+    <div class="form-line">
+        <div class="title">OR</div>
+    </div>
+    <div class="form-footer">
+        <a class="btn btn-info" href="{{ route('login') }}">Login</a>
+    </div>
 @endsection

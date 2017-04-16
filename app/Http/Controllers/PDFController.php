@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Smalot\PdfParser\Parser;
 use Smalot\PdfParser\Element\ElementArray;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
 use App\Program;
@@ -18,14 +19,13 @@ class PDFController extends Controller
         return view('pdf.create');
     }
 
-
     public function store(Request $request)
     {
-        if (!$request->hasFile('pdf'))
-        {
-            $request->session()->flash('error', "No se agreg&oacute; ning&uacute;n PDF");
-            return redirect()->route('pdf.create');
-        }
+            if (!$request->hasFile('pdf'))
+            {
+                $request->session()->flash('error', "No se agreg&oacute; ning&uacute;n PDF");
+                return redirect()->route('pdf.create');
+            }
 
         $this->storeDataFromPDF($request->pdf);
 
@@ -94,7 +94,8 @@ class PDFController extends Controller
         $semester = $semester[0] == '0' ? $semester[1] : $semester;
 
         // Checar si el nombre ya existe
-        $already_exist = Student::where('code', $code)->get();
+        $current_user = Auth::user();
+        $already_exist = Student::where('code', $code)->where('user_id', $current_user->id)->get();
         if ($already_exist)
         {
             foreach ($already_exist as $student)
@@ -108,13 +109,14 @@ class PDFController extends Controller
         $student->name = $name;
         $student->program_id = $program[0]->id;
         $student->semester_id = $semester + 1;
+        $student->user_id = $current_user->id;
         $student->save();
 
         // Guardar calificaciones
         $courses = Program::find($program[0]->id)->courses()->get();
         foreach ($courses as $course)
         {
-            $course_name = str_replace(" ", "", $course->name);
+            $course_name = preg_replace("/[^a-zA-Z0-9]+/", "", $course->name);
             $occurrence = strstr($full_text, $course_name);
             if ($occurrence)
             {   

@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use App\Program;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('layouts.sidebar', function($view)
         {
-            $programs = Program::all();
+            $programs = User::find(Auth::user()->id)->programs()->get();
             $view->with('programs', $programs);
         });
     }
