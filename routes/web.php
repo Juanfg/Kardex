@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('/pdf', 'PDFController@create')->name('pdf.create');
     Route::post('/pdf/store', 'PDFController@store')->name('pdf.store');
 
+    Route::get('/programs/create', 'ProgramController@create')->name('program.create');
+    Route::posT('/programs/storePDF', 'ProgramController@storeFromPDF')->name('program.storeFromPDF');
     Route::get('/programs/catalog', 'ProgramController@catalog')->name('program.catalog');
     Route::post('/programs/select', 'ProgramController@select')->name('program.select');
     Route::get('/{id}', 'ProgramController@show')->where('id', '[0-9]+')->name('program.show');

@@ -19,14 +19,13 @@ class PDFController extends Controller
         return view('pdf.create');
     }
 
-
     public function store(Request $request)
     {
-        if (!$request->hasFile('pdf'))
-        {
-            $request->session()->flash('error', "No se agreg&oacute; ning&uacute;n PDF");
-            return redirect()->route('pdf.create');
-        }
+            if (!$request->hasFile('pdf'))
+            {
+                $request->session()->flash('error', "No se agreg&oacute; ning&uacute;n PDF");
+                return redirect()->route('pdf.create');
+            }
 
         $this->storeDataFromPDF($request->pdf);
 
@@ -117,7 +116,7 @@ class PDFController extends Controller
         $courses = Program::find($program[0]->id)->courses()->get();
         foreach ($courses as $course)
         {
-            $course_name = str_replace(" ", "", $course->name);
+            $course_name = preg_replace("/[^a-zA-Z0-9]+/", "", $course->name);
             $occurrence = strstr($full_text, $course_name);
             if ($occurrence)
             {   
